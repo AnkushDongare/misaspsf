@@ -21,7 +21,7 @@ const HomePage = () => {
                 const result = await response.json();
                 if (result.valid) {
                     console.log('Code validated successfully!');
-                    navigate(`/entry/${response.codeNumber}`);
+                    navigate(`/entry/${code}`);
                 } else {
                     alert('Code validation failed.');
                 }
