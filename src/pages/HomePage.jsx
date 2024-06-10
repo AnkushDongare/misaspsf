@@ -17,16 +17,11 @@ const HomePage = () => {
                 body: JSON.stringify({ codeNumber: code }),
             });
 
-            if (response.ok) {
-                const result = await response.json();
-                if (result.valid) {
-                    console.log('Code validated successfully!');
-                    navigate(`/entry/${code}`);
-                } else {
-                    alert('Code validation failed.');
-                }
+            const result = await response.json();
+            if (response.ok && result.codeNumber) {
+                navigate(`/entry/${code}`);
             } else {
-                alert('Failed to validate code. Please insert a valid code');
+                alert('Failed to validate code. Please insert a valid code.');
             }
         } catch (error) {
             console.error('Error validating code:', error);
@@ -68,7 +63,7 @@ const HomePage = () => {
                     placeholder="Enter your secret code"
                     required
                 />
-                    <button type="submit" className="submit-button">Submit</button>
+                <button type="submit" className="submit-button">Submit</button>
             </form>
 
             <div className="contact">
