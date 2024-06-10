@@ -47,7 +47,7 @@ const AISTest = () => {
 
             if (response.ok) {
                 console.log('Responses submitted successfully!');
-                navigate(`/successful-submit/${id}`);
+                navigate(`/successful-submit/${response.id}`);
             } else {
                 console.error('Failed to submit responses.');
             }
