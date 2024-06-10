@@ -37,7 +37,7 @@ const AISTest = () => {
         e.preventDefault();
         console.log(JSON.stringify({ id, responses }));
         try {
-            const response = await fetch('http://localhost:5000/submit', {
+            const response = await fetch('https://misasps.onrender.com/submit', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

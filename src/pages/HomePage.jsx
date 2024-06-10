@@ -9,7 +9,7 @@ const HomePage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost:5000/code/validate', {
+            const response = await fetch('https://misasps.onrender.com/code/validate', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
