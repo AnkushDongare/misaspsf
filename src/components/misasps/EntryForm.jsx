@@ -32,19 +32,13 @@ function EntryForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const { subject1, subject2, subject3, subject4, subject5, subject6, ...rest } = formData;
-
-        // Filter out empty subjects
-        const subjects = [subject1, subject2, subject3, subject4, subject5, subject6].filter(subject => subject !== '');
-    
-        const finalFormData = { ...rest, subjects };
         try {
             const response = await fetch('https://misasps.onrender.com/entry', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(finalFormData),
+                body: JSON.stringify(formData),
             });
 
             if (response.ok) {

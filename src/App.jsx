@@ -4,6 +4,7 @@ import EntryForm from './components/misasps/EntryForm'
 import Instructions from './components/misasps/Instructions'
 import AISTest from './components/misasps/AISTest'
 import SuccessfulSubmit from './components/misasps/SuccessfulSubmit'
+import ResultList from './components/misasps/ResultList'
 
 function App() {
   return (
@@ -14,6 +15,8 @@ function App() {
         <Route path='/instructions/:id' element={<Instructions />} />
         <Route path='/test/:language/:id' element={<AISTest />} />
         <Route path='/successful-submit/:id' element={<SuccessfulSubmit />} />
+
+        <Route path='/result' element={<ResultList />} />
       </Routes>
     </Router>
   )

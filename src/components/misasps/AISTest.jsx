@@ -13,8 +13,10 @@ const AISTest = () => {
 
     const [responses, setResponses] = useState({});
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+    const [selectedOption, setSelectedOption] = useState(null); // Track selected option
 
     const handleOptionSelect = (questionSr, value) => {
+        setSelectedOption(value); // Update selected option
         setResponses({
             ...responses,
             [questionSr]: value,
@@ -22,14 +24,17 @@ const AISTest = () => {
     };
 
     const handleNext = () => {
-        if (currentQuestionIndex < questions.length - 1) {
+        // Check if an option has been selected before proceeding to the next question
+        if (selectedOption !== null && currentQuestionIndex < questions.length - 1) {
             setCurrentQuestionIndex(currentQuestionIndex + 1);
+            setSelectedOption(null); // Reset selected option for the next question
         }
     };
 
     const handlePrevious = () => {
         if (currentQuestionIndex > 0) {
             setCurrentQuestionIndex(currentQuestionIndex - 1);
+            setSelectedOption(null); // Reset selected option for the previous question
         }
     };
 
@@ -73,7 +78,7 @@ const AISTest = () => {
                                     type="radio"
                                     name={`question-${currentQuestion.sr}`}
                                     value={optionValues[index]}
-                                    checked={responses[currentQuestion.sr] === optionValues[index]}
+                                    checked={selectedOption === optionValues[index]} // Check against selectedOption
                                     onChange={() => handleOptionSelect(currentQuestion.sr, optionValues[index])}
                                 />
                                 {option}
@@ -86,7 +91,7 @@ const AISTest = () => {
                         Previous
                     </button>
                     {currentQuestionIndex < questions.length - 1 ? (
-                        <button onClick={handleNext}>Next</button>
+                        <button onClick={handleNext} disabled={selectedOption === null}>Next</button> 
                     ) : (
                         <button onClick={handleSubmit}>Submit</button>
                     )}
