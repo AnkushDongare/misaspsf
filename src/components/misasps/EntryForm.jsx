@@ -3,6 +3,8 @@ import './entry.css'
 import { useNavigate } from "react-router-dom"
 function EntryForm() {
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
+
     const [formData, setFormData] = useState({
         name: '',
         father_name: '',
@@ -32,6 +34,8 @@ function EntryForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
+
         try {
             const response = await fetch('https://misasps.onrender.com/entry', {
                 method: 'POST',
@@ -50,6 +54,8 @@ function EntryForm() {
             }
         } catch (error) {
             console.error('Error submitting responses:', error);
+        } finally {
+            setLoading(false); // Set loading state to false
         }
     };
 
@@ -123,7 +129,7 @@ function EntryForm() {
                     <label htmlFor="combined">संयुक्त (Combined)</label>
                     <input type="checkbox" id="combined" name="school_type" value="combined" checked={formData.school_type.includes('combined')} onChange={handleChange} />
                     <br />
-                    <input type="submit" value="Submit" />
+                    <input type="submit" value="Submit" disabled={loading}/>
                 </fieldset>
             </form>
         </div>
