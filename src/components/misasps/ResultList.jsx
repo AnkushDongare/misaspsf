@@ -11,8 +11,8 @@ const ResultList = () => {
         const fetchData = async () => {
             try {
                 const [response1, response2] = await Promise.all([
-                    axios.get('http://localhost:5000/api/data'),
-                    axios.get('http://localhost:5000/get/patient')
+                    axios.get('https://misasps.netlify.app/api/data'),
+                    axios.get('https://misasps.netlify.app/get/patient')
                 ]);
                 setData1(response1.data.response || []);
                 setData2(response2.data.response || []);

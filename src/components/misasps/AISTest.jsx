@@ -14,6 +14,7 @@ const AISTest = () => {
     const [responses, setResponses] = useState({});
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [selectedOption, setSelectedOption] = useState(null); // Track selected option
+    const [loading, setLoading] = useState(false);
 
     const handleOptionSelect = (questionSr, value) => {
         setSelectedOption(value); // Update selected option
@@ -40,6 +41,7 @@ const AISTest = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
         console.log(JSON.stringify({ id, responses }));
         try {
             const response = await fetch('https://misasps.onrender.com/submit', {
@@ -59,6 +61,8 @@ const AISTest = () => {
             }
         } catch (error) {
             console.error('Error submitting responses:', error);
+        } finally {
+            setLoading(false); // Set loading state to false
         }
     };
 
@@ -91,9 +95,11 @@ const AISTest = () => {
                         Previous
                     </button>
                     {currentQuestionIndex < questions.length - 1 ? (
-                        <button onClick={handleNext} disabled={selectedOption === null}>Next</button> 
+                        <button onClick={handleNext} disabled={selectedOption === null}>Next</button>
                     ) : (
-                        <button onClick={handleSubmit}>Submit</button>
+                        <button onClick={handleSubmit} disabled={loading}>
+                            {loading ? 'Submitting...' : 'Submit'}
+                        </button>
                     )}
                 </div>
             </div>
