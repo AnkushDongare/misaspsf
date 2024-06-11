@@ -5,6 +5,7 @@ import Instructions from './components/misasps/Instructions'
 import AISTest from './components/misasps/AISTest'
 import SuccessfulSubmit from './components/misasps/SuccessfulSubmit'
 import ResultList from './components/misasps/ResultList'
+import Result from './components/misasps/Result'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path='/successful-submit/:id' element={<SuccessfulSubmit />} />
 
         <Route path='/result' element={<ResultList />} />
+        <Route path='/result/:id' element={<Result />} />
       </Routes>
     </Router>
   )

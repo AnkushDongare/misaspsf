@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import {Link} from 'react-router-dom';
 import axios from 'axios';
 
 const ResultList = () => {
@@ -11,8 +12,8 @@ const ResultList = () => {
         const fetchData = async () => {
             try {
                 const [response1, response2] = await Promise.all([
-                    axios.get('https://misasps.netlify.app/api/data'),
-                    axios.get('https://misasps.netlify.app/get/patient')
+                    axios.get('http://localhost:5000/api/data'),
+                    axios.get('http://localhost:5000/get/patient')
                 ]);
                 setData1(response1.data.response || []);
                 setData2(response2.data.response || []);
@@ -57,6 +58,7 @@ const ResultList = () => {
                         <th>Patient Institution</th>
                         <th>Patient Place</th>
                         <th>Response Count</th>
+                        <th>Result Link</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -73,6 +75,7 @@ const ResultList = () => {
                                 <td>{patient.institution || 'N/A'}</td>
                                 <td>{patient.place || 'N/A'}</td>
                                 <td>{Object.keys(item.response).length}</td>
+                                <td><Link to={`/result/${item._id}/`}>See Result</Link></td>
                             </tr>
                         );
                     })}
